@@ -11,8 +11,14 @@ class Categorias extends Controller
     public function index()
     {
         $query = DB::table('dbo.categoria')->get();
-        $url = request()->get('url_to_pay');
-        return view ('welcome', ['listado' => $query], $url);
+        
+        return view ('welcome', ['listado' => $query] );
+    }
+
+    public function transbank()
+    {
+        $url = request()->get('Url_to_pay');
+        return view('welcome')->with('url', $url);
     }
 
 }

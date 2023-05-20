@@ -29,7 +29,7 @@ class TransbankController extends Controller
         $nueva_compra ->total = 123456;
         $nueva_compra->save();
         $url_to_pay = self::start_web_pay_plus_transaction( $nueva_compra );
-        return redirect()->action('Categorias@index', $url_to_pay);
+        return view('carrito' ) -> with('url', $url_to_pay);
     }
 
     public function start_web_pay_plus_transaction($nueva_compra)

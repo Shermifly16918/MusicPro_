@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AutenticacionController;
 use App\Http\Controllers\Categorias;
 use App\Http\Controllers\DatosPruebaController;
 use App\Http\Controllers\DummysController;
+use App\Http\Controllers\TransbankController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -22,5 +25,8 @@ use Illuminate\Support\Facades\DB;
 // });
 
 Route::get('/', [Categorias::class, 'index']);
+Route::get('/carrito', [TransbankController::class, 'iniciar_compra']);
 Route::get('/prueba', [DatosPruebaController::class, 'index']);
-
+Route::get('/login', [AutenticacionController::class, 'login']);
+Route::get('/registro', [AutenticacionController::class, 'registro'])->name('registro');
+Route::post('/registro-usuario', [AutenticacionController::class, 'registroUsuario'])->name('registro-usuario');

@@ -2,24 +2,24 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Cliente extends Model
+class Cliente extends Authenticatable
 {
+    use HasApiTokens, HasFactory, Notifiable;
 
-    use HasFactory;
-        /**
-     * The table associated with the model.
+    /**
+     * The attributes that are mass assignable.
      *
-     * @var string
+     * @var array<int, string>
      */
-    protected $table = 'Cliente';
-    protected $primaryKey = 'id_cliente';
-    // public $dverificador = 'd_verificador';
+    protected $fillable = [
+        'cuenta_id',
+    ];
 
-    public $nombres = 'nombres';
-    public $apellidos = 'apellidos';
-    public $telefono = 'telefono';
-    public $direccion = 'direccion';
+   
 }

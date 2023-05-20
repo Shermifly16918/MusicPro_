@@ -7,9 +7,7 @@
    <title>Document</title>
 </head>
 <body>
-
-   {{$url}}
-   <table>
+   
       <thead>
          <th>Nombre</th>
       </thead>
