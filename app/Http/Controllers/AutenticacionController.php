@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cuenta;
+use App\Models\Cliente;
+use Doctrine\DBAL\Types\BigIntType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AutenticacionController extends Controller
 {
@@ -28,18 +32,43 @@ class AutenticacionController extends Controller
         ]);
 
         $cuenta = new Cuenta();
+        
+        
         $cuenta->usuario=$request->usuario;
         $cuenta->nombres=$request->nombres;
         $cuenta->apellidos=$request->apellidos;
         $cuenta->email=$request->email;
-        $cuenta->contrasena=$request->contrasena;
+        $cuenta->contrasena= Hash::make($request->contrasena);
 
-        $res= $cuenta->save();
+        $resCuenta= $cuenta->save();
+        $user_id = Cuenta::select('id')->orderBy('id', 'DESC')->first(); // Obtener el primer resultado de la consulta
 
-        if($res){
-            return back()->with('success','Registrado')->isRedirection('welcome');
+        if ($user_id) {
+            DB::insert('insert into cliente (cuenta_id) values (?)', [$user_id->id]);
+            $data = []; // Array vacío si no necesitas insertar otros datos
+            DB::table('cliente')->insert($data);
+        }
+
+        if($resCuenta){
+            return redirect()->route('login')->with('success', 'Registrado');
+            
         }else{
             return back()->with('fail', 'No estas registrado');
+        }
+    }
+
+    public function loginUsuario(Request $request)
+    {
+        $request->validate([
+            'email'=>'required|email|unique:cuentas',
+            'contrasena'=>'required|min:5|max:20',
+        ]);
+
+        $cuenta = Cuenta::where('email', '=', $request->email)->first();
+        if($cuenta){
+
+        }else{
+            
         }
     }
 }

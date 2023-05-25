@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\AutenticacionController;
 use App\Http\Controllers\Categorias;
+use App\Http\Controllers\ClienteHomeController;
 use App\Http\Controllers\DatosPruebaController;
 use App\Http\Controllers\DummysController;
 use App\Http\Controllers\TransbankController;
+use App\Http\Controllers\TransbankUsuarioController;
+use App\Http\Controllers\UsuarioHomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,8 +28,17 @@ use Illuminate\Support\Facades\DB;
 // });
 
 Route::get('/', [Categorias::class, 'index']);
-Route::get('/carrito', [TransbankController::class, 'iniciar_compra']);
+
 Route::get('/prueba', [DatosPruebaController::class, 'index']);
-Route::get('/login', [AutenticacionController::class, 'login']);
+Route::get('/login', [AutenticacionController::class, 'login'])->name ('login');
+Route::post('login-user', [AutenticacionController::class, 'loginUsuario'])->name('login-user');
 Route::get('/registro', [AutenticacionController::class, 'registro'])->name('registro');
 Route::post('/registro-usuario', [AutenticacionController::class, 'registroUsuario'])->name('registro-usuario');
+
+//Interfaz cliente
+Route::get('/', [ClienteHomeController::class, 'home'])->name ('home');
+Route::get('/carrito_', [TransbankController::class, 'iniciar_compra'])->name( 'compra');
+
+//Interfaz usuario
+Route::get('/home', [UsuarioHomeController::class, 'home'])->name ('home_');
+Route::get('/carrito', [TransbankUsuarioController::class, 'iniciar_compra'])->name('compraUsuario');

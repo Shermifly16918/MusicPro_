@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cuentas', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('id')->autoIncrement();
             $table->string('usuario');
             $table->string('email')->unique();
             $table->string('contrasena');
@@ -27,7 +27,7 @@ return new class extends Migration
 
         Schema::table('cliente', function (Blueprint $table) {
             $table->foreign('cuenta_id')
-                     ->references('id')->on('cuentas')->onDelete('cascade')->nullable();
+                     ->references('id')->on('cuentas')->onDelete('cascade');
         });
     }
 
