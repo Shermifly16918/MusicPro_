@@ -16,6 +16,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('cuenta_id') ->nullable();
         });
+
+        Schema::table('compras', function (Blueprint $table) {
+            $table->foreign('id_cliente')
+                     ->references('id')->on('cliente')->onDelete('cascade');
+        });
     }
 
     /**

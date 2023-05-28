@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Cliente;
 use App\Models\Compra;
 use Illuminate\Http\Request;
 use Transbank\Webpay\WebpayPlus;
@@ -43,11 +45,12 @@ class TransbankUsuarioController extends Controller
         $url = $transaccion->getUrl().'?token_ws='.$transaccion->getToken();
         $id_compra = Compra::select('id')->orderBy('id', 'DESC')->first();
         $session_id = $transaccion->getToken();
+        
         if($id_compra){
             DB::update('update compras set session_id = ? where id = ?', [$session_id, $id_compra->id]);
-        }
-        
 
+            // DB::insert('insert into compras (id_cliente) values (?)', [$user_id->id]);
+        }
         return $url;
     
     }

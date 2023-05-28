@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdministradorDashboardController;
 use App\Http\Controllers\AutenticacionController;
+use App\Http\Controllers\BuscarPorEmailController;
 use App\Http\Controllers\Categorias;
 use App\Http\Controllers\ClienteHomeController;
 use App\Http\Controllers\DatosPruebaController;
 use App\Http\Controllers\DummysController;
+use App\Http\Controllers\HighchartController;
 use App\Http\Controllers\TransbankController;
 use App\Http\Controllers\TransbankUsuarioController;
 use App\Http\Controllers\UsuarioHomeController;
@@ -42,3 +45,12 @@ Route::get('/carrito_', [TransbankController::class, 'iniciar_compra'])->name( '
 //Interfaz usuario
 Route::get('/home', [UsuarioHomeController::class, 'home'])->name ('home_');
 Route::get('/carrito', [TransbankUsuarioController::class, 'iniciar_compra'])->name('compraUsuario');
+
+//Interfaz administrador
+Route::get('/dashboard', [AdministradorDashboardController::class, 'index'])->name ('dashboard');
+Route::get('/email', [AdministradorDashboardController::class, 'email'])->name ('email');
+Route::post('/dashboard/email', [AdministradorDashboardController::class, 'email'])->name ('email-dashboard');
+
+Route::get('/buscar', function () {return view('admi.email');})->name('buscar');
+Route::post('/buscar', [BuscarPorEmailController::class, 'buscar']);
+

@@ -21,5 +21,8 @@ class Cliente extends Authenticatable
         'cuenta_id',
     ];
 
+    protected $table = 'Cliente'; // Especifica el nombre de la tabla según tus necesidades
+    public $timestamps = false; // Desactiva las columnas created_at y updated_at
+
    
 }

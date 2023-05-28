@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Compra;
 use Illuminate\Http\Request;
 use Transbank\Webpay\WebpayPlus;
@@ -46,9 +47,12 @@ class TransbankController extends Controller
         $id_compra = Compra::select('id')->orderBy('id', 'DESC')->first();
         $session_id = $transaccion->getToken();
         if($id_compra){
+            $datos = [
+                'cuenta_id' => null, 
+            ];
+            $modelo = Cliente::create($datos);
             DB::update('update compras set session_id = ? where id = ?', [$session_id, $id_compra->id]);
         }
-
     }
 
     public function confirmar_pago(Request $request)

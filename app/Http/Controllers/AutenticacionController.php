@@ -66,7 +66,7 @@ class AutenticacionController extends Controller
 
         $cuenta = Cuenta::where('email', '=', $request->email)->first();
         if($cuenta){
-
+            
         }else{
             
         }
