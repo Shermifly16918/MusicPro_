@@ -8,6 +8,7 @@ use Doctrine\DBAL\Types\BigIntType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Session;
 
 class AutenticacionController extends Controller
 {
@@ -60,15 +61,38 @@ class AutenticacionController extends Controller
     public function loginUsuario(Request $request)
     {
         $request->validate([
-            'email'=>'required|email|unique:cuentas',
+            'email'=>'required|email',
             'contrasena'=>'required|min:5|max:20',
         ]);
 
         $cuenta = Cuenta::where('email', '=', $request->email)->first();
         if($cuenta){
-            
+            if(Hash::check($request->contrasena, $cuenta->contrasena)){
+                $request->session()->put('loginId', $cuenta->id);
+                return redirect('usuario');
+            }else{
+                return back()->with('fail', 'La contraseña es incorrecta');
+            }
         }else{
-            
+            return back()->with('fail', 'El email no esta registrado');
+        }
+    }
+
+    public function dashboard(Request $request)
+    {
+        $data = array();
+        if(Session::has('loginId'))
+        {
+            $data = Cuenta::where('id', '=', Session::get('loginId'))->first();
+        }
+        return view('usuario.dashboard', compact('data'));
+    }
+
+    public function cerrarSesion()
+    {
+        if(Session::has('loginId')){
+            Session::pull('loginId');
+            return redirect('login');
         }
     }
 }

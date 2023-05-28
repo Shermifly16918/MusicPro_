@@ -114,10 +114,7 @@
                        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
                           <div class="mb-4 flex items-center justify-between">
                              <div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Ultimas transacciones</h3>
-                             </div>
-                             <div class="flex-shrink-0">
-                                <a href="#" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">Ver todo</a>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Usuarios</h3>
                              </div>
                           </div>
                           <div class="flex flex-col mt-15">
@@ -131,34 +128,43 @@
                                                   Id
                                                </th>
                                                <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                  Fecha
+                                                  Usuario
                                                </th>
                                                <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                  Monto
+                                                Email
                                                </th>
                                                <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Monto
+                                                  Nombres
                                                </th>
                                                <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                   Monto
+                                                  Apellidos
                                                </th>
                                                <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                   Monto
+                                                   Creada el
                                                </th>
                                             </tr>
                                          </thead>
                                          <tbody class="bg-white">
-                                          @foreach($compras as $compra)
+                                          @foreach($listado as $cuenta)
                                           @csrf
                                             <tr>
                                                <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                                {{$compra->id}}
+                                                {{$cuenta->id}}
                                                </td>
                                                <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                                {{$compra->created_at}}
+                                                {{$cuenta->usuario}}
+                                               </td>
+                                               <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                                                {{$cuenta->email}}
                                                </td>
                                                <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                                {{$compra->total}}
+                                                {{$cuenta->nombres}}
+                                               </td>
+                                               <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                                                {{$cuenta->apellidos}}
+                                               </td>
+                                               <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                                                {{$cuenta->created_at}}
                                                </td>
                                             </tr>
                                             @endforeach
@@ -167,161 +173,6 @@
                                    </div>
                                 </div>
                              </div>
-                          </div>
-                       </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 2xl:grid-cols-2 xl:gap-4 my-4">
-                       <div class="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
-                          <div class="flex items-center justify-between mb-4">
-                             <h3 class="text-xl font-bold leading-none text-gray-900">Latest Customers</h3>
-                             <a href="#" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2">
-                             View all
-                             </a>
-                          </div>
-                          <div class="flex flex-col mt-15">
-                           <div class="overflow-x-auto rounded-lg">
-                              <div class="align-middle inline-block max-w-full">
-                                 <div class="shadow overflow-hidden sm:rounded-lg">
-                                    <table class="min-w-full divide-y divide-gray-200">
-                                       <thead class="bg-gray-50">
-                                          <tr>
-                                             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Id
-                                             </th>
-                                             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Usuario
-                                             </th>
-                                             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Nombres
-                                             </th>
-                                             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Apellidos
-                                             </th>
-                                          </tr>
-                                       </thead>
-                                       <tbody class="bg-white">
-                                          @foreach ($usuarios as $usuario)
-                                          <tr>
-                                             <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                              {{$usuario->id}}
-                                             </td>
-                                             <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                              {{$usuario->usuario}}
-                                             </td>
-                                             <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                                {{$usuario->nombres}}
-                                             </td>
-                                             <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                                {{$usuario->apellidos}}
-                                             </td>
-                                          </tr>
-                                          @endforeach
-                                       </tbody>
-                                    </table>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                       </div>
-                       <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-                          <h3 class="text-xl leading-none font-bold text-gray-900 mb-10">Acquisition Overview</h3>
-                          <div class="block w-full overflow-x-auto">
-                             <table class="items-center w-full bg-transparent border-collapse">
-                                <thead>
-                                   <tr>
-                                      <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Top Channels</th>
-                                      <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Users</th>
-                                      <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px"></th>
-                                   </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-100">
-                                   <tr class="text-gray-500">
-                                      <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Organic Search</th>
-                                      <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">5,649</td>
-                                      <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                         <div class="flex items-center">
-                                            <span class="mr-2 text-xs font-medium">30%</span>
-                                            <div class="relative w-full">
-                                               <div class="w-full bg-gray-200 rounded-sm h-2">
-                                                  <div class="bg-cyan-600 h-2 rounded-sm" style="width: 30%"></div>
-                                               </div>
-                                            </div>
-                                         </div>
-                                      </td>
-                                   </tr>
-                                   <tr class="text-gray-500">
-                                      <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Referral</th>
-                                      <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">4,025</td>
-                                      <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                         <div class="flex items-center">
-                                            <span class="mr-2 text-xs font-medium">24%</span>
-                                            <div class="relative w-full">
-                                               <div class="w-full bg-gray-200 rounded-sm h-2">
-                                                  <div class="bg-orange-300 h-2 rounded-sm" style="width: 24%"></div>
-                                               </div>
-                                            </div>
-                                         </div>
-                                      </td>
-                                   </tr>
-                                   <tr class="text-gray-500">
-                                      <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Direct</th>
-                                      <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">3,105</td>
-                                      <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                         <div class="flex items-center">
-                                            <span class="mr-2 text-xs font-medium">18%</span>
-                                            <div class="relative w-full">
-                                               <div class="w-full bg-gray-200 rounded-sm h-2">
-                                                  <div class="bg-teal-400 h-2 rounded-sm" style="width: 18%"></div>
-                                               </div>
-                                            </div>
-                                         </div>
-                                      </td>
-                                   </tr>
-                                   <tr class="text-gray-500">
-                                      <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Social</th>
-                                      <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">1251</td>
-                                      <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                         <div class="flex items-center">
-                                            <span class="mr-2 text-xs font-medium">12%</span>
-                                            <div class="relative w-full">
-                                               <div class="w-full bg-gray-200 rounded-sm h-2">
-                                                  <div class="bg-pink-600 h-2 rounded-sm" style="width: 12%"></div>
-                                               </div>
-                                            </div>
-                                         </div>
-                                      </td>
-                                   </tr>
-                                   <tr class="text-gray-500">
-                                      <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Other</th>
-                                      <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">734</td>
-                                      <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                         <div class="flex items-center">
-                                            <span class="mr-2 text-xs font-medium">9%</span>
-                                            <div class="relative w-full">
-                                               <div class="w-full bg-gray-200 rounded-sm h-2">
-                                                  <div class="bg-indigo-600 h-2 rounded-sm" style="width: 9%"></div>
-                                               </div>
-                                            </div>
-                                         </div>
-                                      </td>
-                                   </tr>
-                                   <tr class="text-gray-500">
-                                      <th class="border-t-0 align-middle text-sm font-normal whitespace-nowrap p-4 pb-0 text-left">Email</th>
-                                      <td class="border-t-0 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4 pb-0">456</td>
-                                      <td class="border-t-0 align-middle text-xs whitespace-nowrap p-4 pb-0">
-                                         <div class="flex items-center">
-                                            <span class="mr-2 text-xs font-medium">7%</span>
-                                            <div class="relative w-full">
-                                               <div class="w-full bg-gray-200 rounded-sm h-2">
-                                                  <div class="bg-purple-500 h-2 rounded-sm" style="width: 7%"></div>
-                                               </div>
-                                            </div>
-                                         </div>
-                                      </td>
-                                   </tr>
-                                </tbody>
-                             </table>
                           </div>
                        </div>
                     </div>

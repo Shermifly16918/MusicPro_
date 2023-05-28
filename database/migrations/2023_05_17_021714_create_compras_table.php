@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('session_id')->nullable();
             $table->float('total', 9, 2);
             $table->unsignedBigInteger('id_cliente') ->nullable();
-            $table->tinyInteger('status')->comment('1:pendiente. 2:Aprovada.')->default(1);
+            $table->tinyInteger('status')->comment('1:pendiente. 2:Aprobada.')->default(1);
             $table->softDeletes();
             $table->timestamps();
             

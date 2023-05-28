@@ -15,9 +15,17 @@ class AdministradorDashboardController extends Controller
 
     public function index()
     {
-        $query = DB::table('dbo.compras')->get();
-        
-        return view ('admi.dashboard', ['compras' => $query] );
+        $compras = DB::table('dbo.compras')
+            ->latest()
+            ->take(10)
+            ->get();
+
+        $usuarios = DB::table('dbo.cuentas')
+            ->latest()
+            ->take(10)
+            ->get();  
+              
+        return view('admi.dashboard', compact('compras', 'usuarios'));
     }
 
 
