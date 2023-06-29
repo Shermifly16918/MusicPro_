@@ -169,6 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Yajra\Oci8\Oci8ServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -184,6 +185,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'CartCliente' => Darryldecode\Cart\Facades\CartFacade::class,
+        'CartUsuario' => Darryldecode\Cart\Facades\CartFacade::class,
     ])->toArray(),
 
 ];

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->tinyInteger('status')->comment('1:pendiente. 2:Aprobada.')->default(1);
             $table->softDeletes();
             $table->timestamps();
-            
         });
     }
 
